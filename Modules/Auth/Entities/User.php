@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Auth\Entities;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Course\Entities\Course;
+use Modules\Course\Entities\CourseUser;
 
 class User extends Authenticatable
 {
@@ -20,7 +22,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'type',
         'password',
+        'email_verified_at',
+        'status',
+
     ];
 
     /**
