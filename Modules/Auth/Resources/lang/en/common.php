@@ -27,4 +27,5 @@ return [
     'no_account' => "Don't have an account?",
     'sign_up' => 'Sign Up',
     'language' => 'Language',
+    'logout' => 'Logout',
 ];

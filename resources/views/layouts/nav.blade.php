@@ -5,20 +5,42 @@
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm">Dashboard</li>
                 @stack('breadcrumb')
-                {{-- هنا الكود ده الي هحطه جوا كل صفحه --}}
-                {{-- <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li> --}}
             </ol>
             <h6 class="font-weight-bolder mb-0">@stack('title')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                        <i class="fa fa-user me-sm-1"></i>
-                        <span class="d-sm-inline d-none">Sign In</span>
+            <ul class="navbar-nav ms-auto d-flex align-items-center"> <!-- ضبط المحاذاة -->
+                <!-- زر تغيير اللغة -->
+                <li class="nav-item dropdown me-3">
+                    <button class="btn btn-outline-info dropdown-toggle px-3 py-2 rounded-pill" type="button"
+                        id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        🌍 {{ __('auth::common.language') }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li>
+                                <a class="dropdown-item text-center fw-bold"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                <!-- زر تسجيل الخروج -->
+                <li class="nav-item">
+                    <a href="javascript:;" onclick="$('#logout-form').submit()"
+                        class="btn btn-danger px-3 py-2 rounded-pill">
+                        <i class="fas fa-sign-out-alt me-1"></i>
+                        <span>{{ __('auth::common.logout') }}</span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<form method="post" action="{{ route('admin.logout') }}" id="logout-form">
+    @csrf
+</form>

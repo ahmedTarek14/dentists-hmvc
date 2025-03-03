@@ -12,8 +12,9 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Home\Http\Controllers\Dashboard\HomeController;
 
-Route::middleware('auth:web')->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::group(['prefix' => LaravelLocalization::setLocale() . '/admin', 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:web']], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('admin.dashboard');
 });
