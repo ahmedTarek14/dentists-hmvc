@@ -22,3 +22,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ aurl('js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
+
+<script src="{{ aurl('js/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+<script src="{{ aurl('js/admin.js') }}"></script>
+@stack('script')
