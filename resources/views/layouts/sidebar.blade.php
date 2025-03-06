@@ -1,4 +1,4 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+{{-- <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
     id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -242,4 +242,64 @@
             </li>
         </ul>
     </div>
+</aside> --}}
+
+
+
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+    id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary position-absolute end-0 top-0 d-xl-none"
+            aria-hidden="true" id="iconSidenav"></i>
+        <a class="m-0" href="{{ route('admin.dashboard') }}">
+            <img src="{{ aurl('img/curved-images/curved6.png') }}" class="h-100" alt="logo">
+        </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <!-- Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+                    href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-home me-2"></i>
+                    <span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
+                </a>
+            </li>
+
+            <!-- المنتجات -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.product.*') ? 'active' : '' }}"
+                    href="{{ route('admin.product.index') }}">
+                    <i class="fas fa-box-open me-2"></i>
+                    <span class="nav-link-text ms-1">{{ __('product::product.Products') }}</span>
+                </a>
+            </li>
+
+            <!-- المدن -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.city.*') ? 'active' : '' }}"
+                    href="{{ route('admin.city.index') }}">
+                    <i class="fas fa-city me-2"></i>
+                    <span class="nav-link-text ms-1">{{ __('city::city.Cities') }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </aside>
+@push('script')
+    <script>
+        document.getElementById('iconSidenav').addEventListener('click', function() {
+            document.getElementById('sidenav-main').classList.toggle('d-none');
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 992) {
+                document.getElementById('sidenav-main').classList.add('d-none');
+            } else {
+                document.getElementById('sidenav-main').classList.remove('d-none');
+            }
+        });
+    </script>
+@endpush

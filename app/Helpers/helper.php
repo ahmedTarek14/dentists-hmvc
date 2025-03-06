@@ -11,21 +11,21 @@ if (!function_exists('failed_validation')) {
 if (!function_exists('add_response')) {
     function add_response()
     {
-        return response()->json('Data has been added successfully', 200);
+        return response()->json(__('response.add_response_success'), 200);
     }
 }
 
 if (!function_exists('update_response')) {
     function update_response()
     {
-        return response()->json('Data has been updated successfully', 200);
+        return response()->json(__('response.update_response_success'), 200);
     }
 }
 
 if (!function_exists('error_response')) {
     function error_response()
     {
-        return response()->json('Error , please try again later', 400);
+        return response()->json(__('response.error_response'), 400);
     }
 }
 

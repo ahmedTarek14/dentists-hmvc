@@ -42,13 +42,11 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th>
                                         {{ __('city::city.City Name') }}</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                    <th class="text-center">
                                         {{ __('city::city.Status') }}</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                    <th class="text-center">
                                         {{ __('city::city.Actions') }}</th>
                                 </tr>
                             </thead>
