@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Course\Entities\Course;
 use Modules\Course\Entities\CourseUser;
+use Modules\Order\Entities\Order;
+use Modules\Product\Entities\Work;
+use Modules\User\Entities\Rating;
 
 class User extends Authenticatable
 {
@@ -47,4 +50,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function works()
+    {
+        return $this->hasMany(Work::class, 'technician_id');
+    }
+
+    // جلب جميع الطلبات اللي تمت على أعمال الفني
+    public function workOrders()
+    {
+        return $this->hasManyThrough(Order::class, Work::class, 'technician_id', 'work_id', 'id', 'id');
+    }
+
+    // حساب متوسط التقييمات لأعمال الفني (لو كان فني)
+    public function averageRating()
+    {
+        return $this->works()->with('ratings')->get()->flatMap->ratings->avg('rating');
+    }
 }

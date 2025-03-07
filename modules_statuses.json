@@ -2,5 +2,7 @@
     "Auth": true,
     "Home": true,
     "Product": true,
-    "City": true
+    "City": true,
+    "Order": true,
+    "User": true
 }

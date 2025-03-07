@@ -2,32 +2,26 @@
 
 namespace Modules\Product\Entities;
 
+use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Traits\ImageTrait;
-use Modules\Order\Entities\Order;
+use Modules\Auth\Entities\User;
 use Modules\User\Entities\Rating;
 
-class Product extends Model
+class Work extends Model
 {
     use HasFactory, ImageTrait;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'image',
-        'quantity',
-    ];
+    protected $fillable = ['technician_id', 'title', 'description', 'price', 'image'];
 
     public function getImagePathAttribute()
     {
-        return $this->get_image($this->image, 'products');
+        return $this->get_image($this->image, 'works');
     }
 
-    public function orders()
+    public function technician()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(User::class, 'technician_id');
     }
 
     public function ratings()
