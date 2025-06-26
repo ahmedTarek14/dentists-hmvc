@@ -39,6 +39,7 @@ class CityRequest extends FormRequest
     {
 
         $rules['name'] = ['required', 'string', 'max:255'];
+        $rules['shipping_fees'] = ['required', 'numeric', 'min:0'];
 
         return $rules;
     }
@@ -47,6 +48,7 @@ class CityRequest extends FormRequest
     {
         $attributes = [
             'name' => __('city::city.City Name'),
+            'shipping_fees' => __('city::city.Shipping Fees'),
         ];
 
         return $attributes;

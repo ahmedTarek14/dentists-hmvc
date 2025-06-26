@@ -17,5 +17,6 @@ return [
     'Activate' => 'تفعيل',
     'Edit City' => 'تعديل المدينه',
     'Edit' => 'تعديل',
-    'Are you sure you want to change the status?' => 'هل أنت متأكد أنك تريد تغيير الحالة؟'
+    'Are you sure you want to change the status?' => 'هل أنت متأكد أنك تريد تغيير الحالة؟',
+    'Shipping Fees' => 'رسوم الشحن',
 ];

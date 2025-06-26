@@ -1,4 +1,4 @@
-<form class="modal-content ajax-form" action="{{ route('admin.city.update', ['city' => $city->id]) }}" method="PUT">
+<form class="modal-content ajax-form" action="{{ route('admin.city.update', ['city' => $city->id]) }}" method="POST">
     @csrf
     @method('PUT')
     <div class="modal-header">
@@ -7,13 +7,20 @@
         </h5>
     </div>
     <div class="modal-body">
-        <label for="name" class="form-label">{{ __('city::city.City Name') }}</label>
-        <input type="text" class="form-control" name="name" value="{{ $city->name }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">{{ __('city::city.City Name') }}</label>
+            <input type="text" class="form-control" name="name" value="{{ $city->name }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="shipping_fees" class="form-label">{{ __('city::city.Shipping Fees') }}</label>
+            <input type="number" step="0.01" min="0" class="form-control" name="shipping_fees"
+                value="{{ $city->shipping_fees }}">
+        </div>
     </div>
     <div class="modal-footer text-end">
         <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">{{ __('city::city.Cancel') }}</button>
         <button type="submit" class="btn btn-primary"
             data-save-text="{{ __('city::city.Save') }}">{{ __('city::city.Save') }}</button>
-    </div>
     </div>
 </form>

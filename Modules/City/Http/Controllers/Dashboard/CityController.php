@@ -34,9 +34,13 @@ class CityController extends Controller
 
     public function update(CityRequest $request, City $city)
     {
-        $city->update($request->validated());
+        try {
+            $city->update($request->validated());
 
-        return back()->with('success', __('City updated successfully.'));
+            return update_response();
+        } catch (\Throwable $th) {
+            return error_response();
+        }
     }
 
     public function toggleStatus(City $city)

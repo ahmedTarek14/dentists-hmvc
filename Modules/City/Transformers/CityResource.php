@@ -17,6 +17,7 @@ class CityResource extends JsonResource
         return [
             'id' => (int)$this->id,
             'name' => (string)$this->name,
+            'shipping_fees' => number_format((float) $this->shipping_fees, 2),
         ];
     }
 }

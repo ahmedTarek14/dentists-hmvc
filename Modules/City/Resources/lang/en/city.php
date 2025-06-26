@@ -17,5 +17,6 @@ return [
     'Activate' => 'Activate',
     'Edit City' => 'Edit City',
     'Edit' => 'Edit',
-    'Are you sure you want to change the status?' => 'Are you sure you want to change the status?'
+    'Are you sure you want to change the status?' => 'Are you sure you want to change the status?',
+    'Shipping Fees' => 'Shipping Fees',
 ];
