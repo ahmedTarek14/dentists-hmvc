@@ -51,16 +51,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function orders()
+    /**
+     * الطلبات اللي الدكتور عملها (اللي هو requester)
+     */
+    public function doctorOrders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'requester_id');
     }
 
+    /**
+     * الطلبات اللي الفني استلمها (اللي هو provider)
+     */
+    public function providerOrders()
+    {
+        return $this->hasMany(Order::class, 'provider_id');
+    }
+
+    /**
+     * التقييمات المرتبطة بالمستخدم
+     */
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
 
+    /**
+     * الأعمال (الخدمات) اللي الفني مقدمها
+     */
     public function works()
     {
         return $this->hasMany(Work::class, 'technician_id');

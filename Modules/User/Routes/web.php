@@ -1,16 +1,16 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Product\Http\Controllers\Dashboard\ProductController;
+use Modules\User\Http\Controllers\Dashboard\UserController;
 
-Route::prefix('user')->group(function() {
-    Route::get('/', 'UserController@index');
+Route::group([
+    'as' => 'admin.',
+    'prefix' => LaravelLocalization::setLocale() . '/admin',
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth:web']
+], function () {
+    Route::get('user/{type}', [UserController::class, 'index'])->name('user.index');
+    Route::resource('user', UserController::class)->except(['index', 'destroy']);
+    Route::post('user/toggle-status/{user}', [UserController::class, 'toggleStatus'])->name('city.toggleStatus');
 });

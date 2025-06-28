@@ -58,12 +58,6 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="card-footer text-center">
-                                <p class="mb-0">
-                                    {{ __('auth::common.no_account') }}
-                                    <a href="#" class="text-info">{{ __('auth::common.sign_up') }}</a>
-                                </p>
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">

@@ -6,6 +6,7 @@ use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Auth\Entities\User;
+use Modules\Order\Entities\Order;
 use Modules\User\Entities\Rating;
 
 class Work extends Model
@@ -32,5 +33,14 @@ class Work extends Model
     public function averageRating()
     {
         return $this->ratings()->avg('rating');
+    }
+
+
+    /**
+     * الطلبات اللي اتعملت على العمل ده
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

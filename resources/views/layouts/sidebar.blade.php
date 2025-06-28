@@ -285,6 +285,26 @@
                     <span class="nav-link-text ms-1">{{ __('city::city.Cities') }}</span>
                 </a>
             </li>
+
+            @php
+                $currentType = request()->route('type');
+            @endphp
+
+            <li class="nav-item">
+                <a class="nav-link {{ $currentType === 'technician' ? 'active' : '' }}"
+                    href="{{ route('admin.user.index', ['type' => 'technician']) }}">
+                    <i class="fas fa-tools me-2"></i>
+                    <span class="nav-link-text ms-1">{{ __('user::user.Technicians') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ $currentType === 'doctor' ? 'active' : '' }}"
+                    href="{{ route('admin.user.index', ['type' => 'doctor']) }}">
+                    <i class="fas fa-user-md me-2"></i>
+                    <span class="nav-link-text ms-1">{{ __('user::user.Doctors') }}</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
