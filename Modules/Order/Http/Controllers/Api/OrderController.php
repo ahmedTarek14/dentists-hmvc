@@ -2,8 +2,6 @@
 
 namespace Modules\Order\Http\Controllers\Api;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\City\Entities\City;
 use Modules\Order\Entities\Order;
@@ -84,7 +82,7 @@ class OrderController extends Controller
             return response()->json([
                 'message' => 'Order created successfully.',
                 'order'   => $order,
-            ], 201);
+            ], 200);
         } catch (\Throwable $th) {
             // dd($th->getMessage());
             return api_response_error();
