@@ -54,6 +54,7 @@ class RegisterRequest extends FormRequest
                     ->uncompromised(),
                 'confirmed',
             ],
+            'city_id' => ['required', 'exists:cities,id'],
         ];
     }
 
@@ -64,6 +65,7 @@ class RegisterRequest extends FormRequest
             'name' => __('auth::common.name'),
             'email' => __('auth::common.email'),
             'password' => __('auth::common.password'),
+            'city_id' => __('auth::common.city_id'),
         ];
     }
 }
