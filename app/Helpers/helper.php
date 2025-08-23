@@ -78,3 +78,11 @@ if (!function_exists('api_response_error')) {
         ], 400);
     }
 }
+
+
+if (!function_exists('sanctum')) {
+    function sanctum()
+    {
+        return auth()->guard('sanctum');
+    }
+}

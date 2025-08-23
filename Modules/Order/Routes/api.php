@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Order\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/order', function (Request $request) {
-    return $request->user();
-});
+Route::middleware(['auth:sanctum'])
+    ->name('order.')
+    ->prefix('order')
+    ->group(function () {
+        Route::post('/preview', [OrderController::class, 'preview'])->name('preview');
+        Route::post('/confirm', [OrderController::class, 'confirm'])->name('confirm');
+    });
