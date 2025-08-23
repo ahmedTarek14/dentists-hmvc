@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             'description' => $this->description ? (string) $this->description : null,
             'price' => (float) $this->price,
             'image' => $this->image ? $this->image_path : null,
-            'rating' => (float) ($this->ratings_avg_rating ?? 0),
+            'rating' => round((float) ($this->ratings_avg_rating ?? 0), 1),
         ];
     }
 }
