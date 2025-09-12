@@ -8,6 +8,7 @@ use Modules\Order\Entities\Order;
 use Modules\Order\Http\Requests\Api\ConfirmOrderRequest;
 use Modules\Order\Http\Requests\Api\OrderRequest;
 use Modules\Order\Transformers\OrderpreviewResource;
+use Modules\Order\Transformers\OrderResource;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\Work;
 
@@ -85,6 +86,26 @@ class OrderController extends Controller
             ], 200);
         } catch (\Throwable $th) {
             // dd($th->getMessage());
+            return api_response_error();
+        }
+    }
+
+    public function myOrders()
+    {
+        try {
+            $user = sanctum()->user();
+
+            $query = Order::with(['product', 'work', 'requester', 'provider', 'city_from', 'city_to']);
+
+            if ($user->type === 'doctor') {
+                $orders = $query->where('requester_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+            } else {
+                $orders = $query->where('provider_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+            }
+
+            $data = OrderResource::collection($orders)->response()->getData(true);
+            return api_response_success($data);
+        } catch (\Throwable $th) {
             return api_response_error();
         }
     }

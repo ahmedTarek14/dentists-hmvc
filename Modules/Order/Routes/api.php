@@ -21,4 +21,5 @@ Route::middleware(['auth:sanctum'])
     ->group(function () {
         Route::post('/preview', [OrderController::class, 'preview'])->name('preview');
         Route::post('/confirm', [OrderController::class, 'confirm'])->name('confirm');
+        Route::get('/myOrders', [OrderController::class, 'myOrders'])->name('myOrders');
     });
