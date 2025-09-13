@@ -14,8 +14,6 @@ class SearchResource extends JsonResource
      */
     public function toArray($request)
     {
-         public function toArray($request)
-    {
         if ($this->resource instanceof \Modules\Auth\Entities\User) {
             return [
                 'id'    => $this->id,
@@ -25,11 +23,11 @@ class SearchResource extends JsonResource
                 'works' => $this->when($this->type == 'technician', function () {
                     return $this->works->map(function ($work) {
                         return [
-                            'id'    => $work->id,
-                            'title' => $work->title,
+                            'id'          => $work->id,
+                            'title'       => $work->title,
                             'description' => $work->description,
-                            'price' => $work->price,
-                            'image' => $work->image_path ?? null,
+                            'price'       => $work->price,
+                            'image'       => $work->image_path ?? null,
                         ];
                     });
                 }),
