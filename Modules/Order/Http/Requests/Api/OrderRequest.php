@@ -32,9 +32,9 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id'     => ['nullable', 'exists:products,id', 'prohibited_if:work_id,!=,null'],
-            'work_id'        => ['nullable', 'exists:works,id', 'prohibited_if:product_id,!=,null'],
-            'provider_id'    => ['required_if:work_id,!=,null', 'nullable', 'exists:users,id'],
+            'product_id'     => ['nullable', 'exists:products,id', 'prohibited_with:work_id'],
+            'work_id'        => ['nullable', 'exists:works,id', 'prohibited_with:product_id'],
+            'provider_id'    => ['required_with:work_id', 'nullable', 'exists:users,id'],
             'city_to_id'     => ['required', 'exists:cities,id'],
             'district_to_id' => ['required', 'exists:districts,id'],
         ];
