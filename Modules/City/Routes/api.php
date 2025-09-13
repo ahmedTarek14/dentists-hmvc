@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\City\Http\Controllers\Api\CityController;
+use Modules\City\Http\Controllers\Api\DistrictController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,8 @@ use Modules\City\Http\Controllers\Api\CityController;
 
 Route::prefix('cities/')->controller(CityController::class)->name('api.')->group(function () {
     Route::get('all', 'cities')->name('cities');
+});
+
+Route::prefix('districts/')->controller(DistrictController::class)->name('api.')->group(function () {
+    Route::get('all', 'index')->name('districts');
 });

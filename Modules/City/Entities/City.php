@@ -9,5 +9,10 @@ class City extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'shipping_fees'];
+    protected $fillable = ['name'];
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
 }
