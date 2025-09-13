@@ -14,10 +14,10 @@ class DistrictController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index($id)
     {
         try {
-            $districts = District::orderBy('id', 'desc')->get();
+            $districts = District::where('city_id', $id)->orderBy('id', 'desc')->get();
             $data = DistrictResource::collection($districts)->response()->getData(true);
             return api_response_success($data);
         } catch (\Throwable $th) {

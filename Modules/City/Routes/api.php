@@ -21,5 +21,5 @@ Route::prefix('cities/')->controller(CityController::class)->name('api.')->group
 });
 
 Route::prefix('districts/')->controller(DistrictController::class)->name('api.')->group(function () {
-    Route::get('all', 'index')->name('districts');
+    Route::get('{id}', 'index')->name('districts');
 });
