@@ -13,7 +13,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_number', 'product_id', 'work_id', 'product_price', 'shipping_fees', 'total_price', 'status', 'requester_id', 'provider_id', 'city_from_id', 'city_to_id'];
+    protected $fillable = ['service_number', 'product_id', 'work_id', 'product_price', 'shipping_fees', 'total_price', 'status', 'requester_id', 'provider_id', 'city_from_id', 'city_to_id', 'district_from_id', 'district_to_id'];
 
     /**
      * المنتج المرتبط بالطلب
