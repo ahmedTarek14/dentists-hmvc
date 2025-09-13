@@ -20,17 +20,17 @@ class OrderPreviewResource extends JsonResource
             'total_price'       => (float)  $this->total_price,                  // المجموع الكلي
             'service_number'    => (string) $this->service_number,               // رقم الخدمة الفريد
 
-            'requester_id'      => (int)    $this->requester_id,                 // ID العميل
-            'provider_id'       => $this->provider_id ? (int) $this->provider_id : null,    // ID مقدم الخدمة
+            'requester_id'      =>     $this->requester_id,                 // ID العميل
+            'provider_id'       => $this->provider_id ?  $this->provider_id : null,    // ID مقدم الخدمة
 
-            'city_from_id'      => $this->city_from_id ? (int) $this->city_from_id : null,          // مدينة الشحن (من)
-            'district_from_id'  => $this->district_from_id ? (int) $this->district_from_id : null,  // حي الشحن (من)
+            'city_from_id'      => $this->city_from_id ?  $this->city_from_id : null,          // مدينة الشحن (من)
+            'district_from_id'  => $this->district_from_id ?  $this->district_from_id : null,  // حي الشحن (من)
 
-            'city_to_id'        => (int)    $this->city_to_id,                   // مدينة الوجهة (إلى)
-            'district_to_id'    => (int)    $this->district_to_id,               // حي الوجهة (إلى)
+            'city_to_id'        =>     $this->city_to_id,                   // مدينة الوجهة (إلى)
+            'district_to_id'    =>     $this->district_to_id,               // حي الوجهة (إلى)
 
-            'product_id'        => $this->product_id ? (int) $this->product_id : null, // المنتج
-            'work_id'           => $this->work_id ? (int) $this->work_id : null,       // الخدمة
+            'product_id'        => $this->product_id ?  $this->product_id : null, // المنتج
+            'work_id'           => $this->work_id ?  $this->work_id : null,       // الخدمة
         ];
     }
 }
