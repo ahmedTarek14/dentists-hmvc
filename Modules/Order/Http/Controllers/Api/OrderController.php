@@ -3,7 +3,9 @@
 namespace Modules\Order\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
+use Modules\Auth\Entities\User;
 use Modules\City\Entities\City;
+use Modules\City\Entities\District;
 use Modules\Order\Entities\Order;
 use Modules\Order\Http\Requests\Api\ConfirmOrderRequest;
 use Modules\Order\Http\Requests\Api\OrderRequest;
@@ -18,51 +20,45 @@ class OrderController extends Controller
     {
         try {
 
-            $requester_id = sanctum()->id();
-            if (!$request->product_id && !$request->work_id) {
-                return api_response_error('You must provide either a product_id or work_id');
-            }
-
+            $requesterId = sanctum()->id();
             $price = $request->product_id
-                ? Product::find($request->product_id)->price
-                : Work::find($request->work_id)->price;
+                ? Product::findOrFail($request->product_id)->price
+                : Work::findOrFail($request->work_id)->price;
 
-            $shipping = City::find($request->city_to_id)->shipping_fees ?? 0;
+            $shipping = District::find($request->district_to_id)->shipping_fees ?? 0;
             $total = $price + $shipping;
 
-            // توليد رقم خدمة فريد
-            $lastOrderId = Order::max('id') + 1;
-            $serviceNumber = 'SRV' . str_pad($lastOrderId, 6, '0', STR_PAD_LEFT);
+            $cityFromId = null;
+            $districtFromId = null;
 
-            // تأكد إنه مش موجود (احتياطي)
-            while (Order::where('service_number', $serviceNumber)->exists()) {
-                $lastOrderId++;
-                $serviceNumber = 'SRV' . str_pad($lastOrderId, 6, '0', STR_PAD_LEFT);
+            if ($request->work_id) {
+                $provider = User::findOrFail($request->provider_id);
+                $cityFromId = $provider->city_id ?? null;
+                $districtFromId = $provider->district_id ?? null;
             }
 
+            $serviceNumber = $this->generateServiceNumber();
             $order = new Order([
-                'product_price' => $price,
-                'shipping_fees' => $shipping,
-                'total_price' => $total,
-                'service_number' => $serviceNumber,
-                'requester_id' => $requester_id,
-                'provider_id' => $request->provider_id,
-                'city_from_id' => sanctum()->user()->city->id, //المفروض اجيبها من اليوزر 
-                'city_to_id' => $request->city_to_id,
-                'product_id' => $request->product_id,
-                'work_id' => $request->work_id,
+                'product_price'     => $price,
+                'shipping_fees'     => $shipping,
+                'total_price'       => $total,
+                'service_number'    => $serviceNumber,
+                'requester_id'      => $requesterId,
+                'provider_id'       => $request->provider_id,
+                'city_from_id'      => $cityFromId,
+                'district_from_id'  => $districtFromId,
+                'city_to_id'        => $request->city_to_id,
+                'district_to_id'    => $request->district_to_id,
+                'product_id'        => $request->product_id,
+                'work_id'           => $request->work_id,
             ]);
 
-            $data = new OrderPreviewResource($order);
-
-            return api_response_success($data);
+            return api_response_success(new OrderPreviewResource($order));
         } catch (\Throwable $th) {
-            // dd($th->getMessage());
             return api_response_error();
         }
     }
 
-    // تأكيد الطلب وإنشاؤه في قاعدة البيانات
     public function confirm(ConfirmOrderRequest $request)
     {
         try {
@@ -72,8 +68,10 @@ class OrderController extends Controller
                 'work_id'        => $request?->work_id,
                 'requester_id'   => $request->requester_id,
                 'provider_id'    => $request?->provider_id,
-                'city_from_id'   => $request->city_from_id,
+                'city_from_id'   => $request?->city_from_id,
                 'city_to_id'     => $request->city_to_id,
+                'district_from_id'   => $request?->district_from_id,
+                'district_to_id'    => $request->district_to_id,
                 'product_price'  => $request->product_price,
                 'shipping_fees'  => $request->shipping_fees,
                 'total_price'    => $request->total_price,
@@ -85,9 +83,21 @@ class OrderController extends Controller
                 'order'   => $order,
             ], 200);
         } catch (\Throwable $th) {
-            // dd($th->getMessage());
             return api_response_error();
         }
+    }
+
+    private function generateServiceNumber(): string
+    {
+        $lastOrderId = Order::max('id') + 1;
+        $serviceNumber = 'SRV' . str_pad($lastOrderId, 6, '0', STR_PAD_LEFT);
+
+        while (Order::where('service_number', $serviceNumber)->exists()) {
+            $lastOrderId++;
+            $serviceNumber = 'SRV' . str_pad($lastOrderId, 6, '0', STR_PAD_LEFT);
+        }
+
+        return $serviceNumber;
     }
 
     public function myOrders()

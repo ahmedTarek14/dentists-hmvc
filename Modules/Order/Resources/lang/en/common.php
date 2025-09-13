@@ -8,6 +8,7 @@ return [
     'provider'       => 'Provider',
     'city_from'      => 'City From',
     'city_to'        => 'City To',
+    'district_to'        => 'District To',
     'product'        => 'Product',
     'work'           => 'Work',
 ];

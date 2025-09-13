@@ -32,10 +32,11 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id'  => ['nullable', 'exists:products,id'],
-            'work_id'     => ['nullable', 'exists:works,id'],
-            'provider_id' => ['nullable', 'exists:users,id'],
-            'city_to_id'  => ['required', 'exists:cities,id'],
+            'product_id'     => ['nullable', 'exists:products,id', 'prohibited_if:work_id,!=,null'],
+            'work_id'        => ['nullable', 'exists:works,id', 'prohibited_if:product_id,!=,null'],
+            'provider_id'    => ['required_if:work_id,!=,null', 'nullable', 'exists:users,id'],
+            'city_to_id'     => ['required', 'exists:cities,id'],
+            'district_to_id' => ['required', 'exists:districts,id'],
         ];
     }
 
@@ -45,10 +46,11 @@ class OrderRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'product_id'  =>__('order::common.product'),
+            'product_id'  => __('order::common.product'),
             'work_id'     => __('order::common.work'),
             'provider_id' => __('order::common.provider'),
             'city_to_id'  => __('order::common.city_to'),
+            'district_to_id'  => __('order::common.district_to'),
         ];
     }
 }
