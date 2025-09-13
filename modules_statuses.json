@@ -4,5 +4,6 @@
     "Product": true,
     "City": true,
     "Order": true,
-    "User": true
+    "User": true,
+    "Search": true
 }
