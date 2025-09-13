@@ -186,7 +186,7 @@ class AuthController extends Controller
     {
         $user = sanctum()->user();
         try {
-            $data = [];
+            $data = $request->validated();
 
             if ($request->hasFile('image')) {
                 if ($user->image) {
