@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Auth\Entities\User;
 use Modules\Auth\Transformers\UserResource;
+use Modules\User\Transformers\DoctorResource;
 
 class DoctorController extends Controller
 {
@@ -23,7 +24,7 @@ class DoctorController extends Controller
                 ->paginate(10);
 
 
-            $data = UserResource::collection($doctors)->response()->getData(true);
+            $data = DoctorResource::collection($doctors)->response()->getData(true);
             return api_response_success($data);
         } catch (\Throwable $th) {
             return api_response_error();
