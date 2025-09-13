@@ -53,7 +53,7 @@ class OrderController extends Controller
                 'work_id'           => $request->work_id,
             ]);
 
-            return api_response_success(new OrderPreviewResource($order));
+            return api_response_success(new OrderpreviewResource($order));
         } catch (\Throwable $th) {
             return api_response_error();
         }
