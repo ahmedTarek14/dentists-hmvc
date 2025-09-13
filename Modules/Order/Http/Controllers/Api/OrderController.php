@@ -9,7 +9,7 @@ use Modules\City\Entities\District;
 use Modules\Order\Entities\Order;
 use Modules\Order\Http\Requests\Api\ConfirmOrderRequest;
 use Modules\Order\Http\Requests\Api\OrderRequest;
-use Modules\Order\Transformers\OrderpreviewResource;
+use Modules\Order\Transformers\OrderPreviewResource;
 use Modules\Order\Transformers\OrderResource;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\Work;
@@ -53,7 +53,7 @@ class OrderController extends Controller
                 'work_id'           => $request->work_id,
             ]);
 
-            return api_response_success(new OrderpreviewResource($order));
+            return api_response_success(new OrderPreviewResource($order));
         } catch (\Throwable $th) {
             return api_response_error();
         }
