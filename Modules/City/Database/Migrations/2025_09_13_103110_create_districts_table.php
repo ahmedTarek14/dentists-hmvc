@@ -14,6 +14,7 @@ class CreateDistrictsTable extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->foreignId('city_id')->constrained('cities')->onDelete('cascade');
             $table->string('name');
