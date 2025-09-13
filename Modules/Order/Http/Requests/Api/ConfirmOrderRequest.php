@@ -38,8 +38,10 @@ class ConfirmOrderRequest extends FormRequest
             'service_number'  => ['required', 'string', 'max:255'],
             'requester_id'    => ['required', 'exists:users,id'],
             'provider_id'     => ['nullable', 'exists:users,id'],
-            'city_from_id'    => ['required', 'exists:cities,id'],
+            'city_from_id'    => ['nullable', 'exists:cities,id'],
             'city_to_id'      => ['required', 'exists:cities,id'],
+            'district_form_id'      => ['nullable', 'exists:districts,id'],
+            'district_to_id'      => ['required', 'exists:districts,id'],
             'product_id'      => ['nullable', 'exists:products,id'],
             'work_id'         => ['nullable', 'exists:works,id'],
         ];
@@ -61,6 +63,8 @@ class ConfirmOrderRequest extends FormRequest
             'city_to_id'     => __('order::common.city_to'),
             'product_id'     => __('order::common.product'),
             'work_id'        => __('order::common.work'),
+            'district_to_id'  => __('order::common.district_to'),
+            'district_from_id'  => __('order::common.district_from'),
         ];
     }
 }

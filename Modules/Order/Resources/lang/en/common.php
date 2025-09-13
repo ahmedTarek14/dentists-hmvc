@@ -9,6 +9,7 @@ return [
     'city_from'      => 'City From',
     'city_to'        => 'City To',
     'district_to'        => 'District To',
+    'district_from'        => 'District From',
     'product'        => 'Product',
     'work'           => 'Work',
 ];
