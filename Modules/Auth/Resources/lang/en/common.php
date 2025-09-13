@@ -28,5 +28,8 @@ return [
     'sign_up' => 'Sign Up',
     'language' => 'Language',
     'logout' => 'Logout',
-    'city_id' => 'City'
+    'city_id' => 'City',
+    'district_id' => 'District',
+    'profile_image' => 'Profile Image'
+
 ];

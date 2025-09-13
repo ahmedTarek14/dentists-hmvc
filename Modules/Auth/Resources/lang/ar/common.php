@@ -28,4 +28,6 @@ return [
     'language' => 'اللغه',
     'logout' => 'تسجيل الخروج',
     'city_id' => 'المدينه',
+    'district_id' => 'الحي',
+    'profile_image' => 'الصوره الشخصيه'
 ];

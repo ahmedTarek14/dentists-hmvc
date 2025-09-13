@@ -2,6 +2,7 @@
 
 namespace Modules\Auth\Http\Controllers\Api;
 
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -9,12 +10,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Entities\PasswordReset;
 use Modules\Auth\Entities\User;
+use Modules\Auth\Http\Requests\Api\AvatarRequest;
 use Modules\Auth\Http\Requests\Api\LoginRequest;
 use Modules\Auth\Http\Requests\Api\RegisterRequest;
 use Modules\Auth\Transformers\UserResource;
 
 class AuthController extends Controller
 {
+    use ImageTrait;
     public function register(RegisterRequest $registerRequest)
     {
         try {
@@ -174,6 +177,29 @@ class AuthController extends Controller
             $user = User::where('id', sanctum()->id())->first();
             $user->delete();
             return api_response_success('Account deleted successfully');
+        } catch (\Throwable $th) {
+            return api_response_error();
+        }
+    }
+
+    public function updateAvatar(AvatarRequest $request)
+    {
+        $user = sanctum()->user();
+        try {
+            $data = [];
+
+            if ($request->hasFile('image')) {
+                if ($user->image) {
+                    $this->image_delete($user->image, 'users');
+                }
+                $data['image'] = $this->image_manipulate($request->file('image'), 'users');
+            }
+
+            if (!empty($data)) {
+                $user->update($data);
+            }
+
+            return api_response_success('Image Updated Successfully');
         } catch (\Throwable $th) {
             return api_response_error();
         }

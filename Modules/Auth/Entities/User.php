@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\City\Entities\City;
+use Modules\City\Entities\District;
 use Modules\Course\Entities\Course;
 use Modules\Course\Entities\CourseUser;
 use Modules\Order\Entities\Order;
@@ -31,6 +32,8 @@ class User extends Authenticatable
         'email_verified_at',
         'status',
         'city_id',
+        'district_id',
+        'address'
 
     ];
 
@@ -100,5 +103,13 @@ class User extends Authenticatable
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+    public function getImagePathAttribute()
+    {
+        return $this->get_image($this->image, 'users');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rules\Password;
 
-class RegisterRequest extends FormRequest
+class AvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -41,34 +41,14 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => ['required', 'in:doctor,technician'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'unique:users,email', 'max:255'],
-            'password' => [
-                'required',
-                'string',
-                Password::min(8)
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised(),
-                'confirmed',
-            ],
-            'city_id' => ['required', 'exists:cities,id'],
-            'district_id' => ['required', 'exists:districts,id'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }
 
     public function attributes()
     {
         return [
-            'type' => __('auth::common.type'),
-            'name' => __('auth::common.name'),
-            'email' => __('auth::common.email'),
-            'password' => __('auth::common.password'),
-            'city_id' => __('auth::common.city_id'),
-            'district_id' => __('auth::common.district_id'),
+            'image' => __('auth::common.profile_image'),
         ];
     }
 }
