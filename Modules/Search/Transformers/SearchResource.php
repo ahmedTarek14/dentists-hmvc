@@ -36,6 +36,10 @@ class SearchResource extends JsonResource
                 'description' => $this->description,
                 'price'       => $this->price,
                 'image'       => $this->image_path ?? null,
+                'technician'  => $this->technician ? [
+                    'id'   => $this->technician->id,
+                    'name' => $this->technician->name,
+                ] : null,
             ];
         }
 

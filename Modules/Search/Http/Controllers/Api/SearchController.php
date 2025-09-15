@@ -28,6 +28,7 @@ class SearchController extends Controller
 
             // Get Works
             $works = Work::where('title', 'like', "%$keyword%")
+                ->with('technician')
                 ->get();
 
             // Get Products
