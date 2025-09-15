@@ -1,6 +1,5 @@
 <?php
 
-<?php
 
 namespace Modules\Search\Http\Controllers\Api;
 
