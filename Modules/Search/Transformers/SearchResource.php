@@ -8,14 +8,14 @@ class SearchResource extends JsonResource
 {
     public function toArray($request)
     {
-        if ($this->resource instanceof \Modules\Auth\Entities\User) {
-            return [
-                'id'    => $this->id,
-                'type'  => 'doctor',
-                'name'  => $this->name,
-                'image' => $this->image_path ?? null,
-            ];
-        }
+        // if ($this->resource instanceof \Modules\Auth\Entities\User) {
+        //     return [
+        //         'id'    => $this->id,
+        //         'type'  => 'doctor',
+        //         'name'  => $this->name,
+        //         'image' => $this->image_path ?? null,
+        //     ];
+        // }
 
         if ($this->resource instanceof \Modules\Product\Entities\Product) {
             return [

@@ -22,9 +22,9 @@ class SearchController extends Controller
             }
 
             // Get Doctors only
-            $doctors = User::where('type', 'doctor')
-                ->where('name', 'like', "%$keyword%")
-                ->get();
+            // $doctors = User::where('type', 'doctor')
+            //     ->where('name', 'like', "%$keyword%")
+            //     ->get();
 
             // Get Works
             $works = Work::where('title', 'like', "%$keyword%")
@@ -37,9 +37,9 @@ class SearchController extends Controller
 
             // Merge all results into one collection
             $allResults = collect()
-                ->merge($doctors)
                 ->merge($works)
                 ->merge($products);
+            // ->merge($doctors)
 
             // Transform results
             $results = SearchResource::collection($allResults)->response()->getData(true);
