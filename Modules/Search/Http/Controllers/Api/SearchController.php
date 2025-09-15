@@ -1,5 +1,7 @@
 <?php
 
+<?php
+
 namespace Modules\Search\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -20,28 +22,27 @@ class SearchController extends Controller
                 return response()->json(['message' => 'Please provide a search query'], 400);
             }
 
+            // Get Doctors only
             $doctors = User::where('type', 'doctor')
                 ->where('name', 'like', "%$keyword%")
                 ->get();
 
-            $technicians = User::where('type', 'technician')
-                ->where('name', 'like', "%$keyword%")
-                ->with('works')
-                ->get();
-
+            // Get Works
             $works = Work::where('title', 'like', "%$keyword%")
                 ->get();
 
-
+            // Get Products
             $products = Product::where('name', 'like', "%$keyword%")
                 ->get();
 
-            $results = [
-                'doctors'     => SearchResource::collection($doctors)->response()->getData(true),
-                'technicians' => SearchResource::collection($technicians)->response()->getData(true),
-                'works'       => SearchResource::collection($works)->response()->getData(true),
-                'products'    => SearchResource::collection($products)->response()->getData(true),
-            ];
+            // Merge all results into one collection
+            $allResults = collect()
+                ->merge($doctors)
+                ->merge($works)
+                ->merge($products);
+
+            // Transform results
+            $results = SearchResource::collection($allResults)->response()->getData(true);
 
             return api_response_success($results);
         } catch (\Throwable $th) {
