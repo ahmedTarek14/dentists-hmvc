@@ -18,7 +18,7 @@ class SearchController extends Controller
             $keyword = $request->get('q');
 
             if (!$keyword) {
-                return response()->json(['message' => 'Please provide a search query'], 400);
+                return api_response_error('Please provide a search query');
             }
 
             // Get Doctors only
