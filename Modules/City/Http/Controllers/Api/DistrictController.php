@@ -21,6 +21,7 @@ class DistrictController extends Controller
                 ->where('status', '1')
                 ->whereHas('city', function ($q) {
                     $q->where('status', '1');
+                })
                 ->orderBy('id', 'desc')
                 ->get();
             $data = DistrictResource::collection($districts)->response()->getData(true);
