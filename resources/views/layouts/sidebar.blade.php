@@ -246,68 +246,91 @@
 
 
 
-
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 shadow-sm"
     id="sidenav-main">
-    <div class="sidenav-header">
+    <div class="sidenav-header text-center py-3">
         <i class="fas fa-times p-3 cursor-pointer text-secondary position-absolute end-0 top-0 d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="m-0" href="{{ route('admin.dashboard') }}">
-            <img src="{{ aurl('img/curved-images/curved6.png') }}" class="h-100" alt="logo">
+        <a class="m-0 d-inline-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+            <img src="{{ aurl('img/curved-images/curved6.png') }}" class="h-100" alt="logo"
+                style="max-height: 40px;">
         </a>
     </div>
-    <hr class="horizontal dark mt-0">
+    <hr class="horizontal dark mt-0 mb-2">
+
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
+
             <!-- Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.dashboard') ? 'active bg-gradient-primary text-white' : '' }}"
                     href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-home me-2"></i>
-                    <span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
+                    <span class="nav-link-text">{{ __('Dashboard') }}</span>
                 </a>
             </li>
 
+            <li class="nav-item text-uppercase text-muted small px-3 mt-3">
+                {{ __('Management') }}
+            </li>
+
             <!-- المنتجات -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.product.*') ? 'active' : '' }}"
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.product.*') ? 'active bg-gradient-primary text-white' : '' }}"
                     href="{{ route('admin.product.index') }}">
                     <i class="fas fa-box-open me-2"></i>
-                    <span class="nav-link-text ms-1">{{ __('product::product.Products') }}</span>
+                    <span class="nav-link-text">{{ __('product::product.Products') }}</span>
+                </a>
+            </li>
+
+            <!-- الطلبات -->
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.orders.*') ? 'active bg-gradient-primary text-white' : '' }}"
+                    href="{{ route('admin.orders.index') }}">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    <span class="nav-link-text">{{ __('order::order.Orders') }}</span>
                 </a>
             </li>
 
             <!-- المدن -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.city.*') || request()->routeIs('admin.district.*') ? 'active' : '' }}"
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.city.*') || request()->routeIs('admin.district.*') ? 'active bg-gradient-primary text-white' : '' }}"
                     href="{{ route('admin.city.index') }}">
                     <i class="fas fa-city me-2"></i>
-                    <span class="nav-link-text ms-1">{{ __('city::city.Cities') }}</span>
+                    <span class="nav-link-text">{{ __('city::city.Cities') }}</span>
                 </a>
+            </li>
+
+            <li class="nav-item text-uppercase text-muted small px-3 mt-3">
+                {{ __('Users') }}
             </li>
 
             @php
                 $currentType = request()->route('type');
             @endphp
 
-            <li class="nav-item">
-                <a class="nav-link {{ $currentType === 'technician' ? 'active' : '' }}"
+            <!-- Technicians -->
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ $currentType === 'technician' ? 'active bg-gradient-primary text-white' : '' }}"
                     href="{{ route('admin.user.index', ['type' => 'technician']) }}">
                     <i class="fas fa-tools me-2"></i>
-                    <span class="nav-link-text ms-1">{{ __('user::user.Technicians') }}</span>
+                    <span class="nav-link-text">{{ __('user::user.Technicians') }}</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ $currentType === 'doctor' ? 'active' : '' }}"
+            <!-- Doctors -->
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ $currentType === 'doctor' ? 'active bg-gradient-primary text-white' : '' }}"
                     href="{{ route('admin.user.index', ['type' => 'doctor']) }}">
                     <i class="fas fa-user-md me-2"></i>
-                    <span class="nav-link-text ms-1">{{ __('user::user.Doctors') }}</span>
+                    <span class="nav-link-text">{{ __('user::user.Doctors') }}</span>
                 </a>
             </li>
+
         </ul>
     </div>
 </aside>
+
 @push('script')
     <script>
         document.getElementById('iconSidenav').addEventListener('click', function() {

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Auth\Entities\User;
 use Modules\City\Entities\City;
+use Modules\City\Entities\District;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\Work;
 
@@ -55,5 +56,15 @@ class Order extends Model
     public function city_to()
     {
         return $this->belongsTo(City::class, 'city_to_id');
+    }
+
+    public function district_from()
+    {
+        return $this->belongsTo(District::class, 'district_from_id');
+    }
+
+    public function district_to()
+    {
+        return $this->belongsTo(District::class, 'district_to_id');
     }
 }
