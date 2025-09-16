@@ -17,16 +17,16 @@ class DistrictController extends Controller
     public function index($id)
     {
         try {
-            $districts = District::where('city_id', $id)->orderBy('id', 'desc')->get();
+            $districts = District::where('city_id', $id)
+                ->where('status', '1')
+                ->whereHas('city', function ($q) {
+                    $q->where('status', '1');
+                ->orderBy('id', 'desc')
+                ->get();
             $data = DistrictResource::collection($districts)->response()->getData(true);
             return api_response_success($data);
         } catch (\Throwable $th) {
             return api_response_error();
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
 }

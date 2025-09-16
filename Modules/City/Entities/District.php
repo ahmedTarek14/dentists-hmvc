@@ -9,7 +9,7 @@ class District extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['city_id', 'name', 'shipping_fees'];
+    protected $fillable = ['city_id', 'name', 'shipping_fees', 'status'];
 
     public function city()
     {

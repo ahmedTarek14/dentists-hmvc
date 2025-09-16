@@ -279,7 +279,7 @@
 
             <!-- المدن -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.city.*') ? 'active' : '' }}"
+                <a class="nav-link {{ request()->routeIs('admin.city.*') || request()->routeIs('admin.district.*') ? 'active' : '' }}"
                     href="{{ route('admin.city.index') }}">
                     <i class="fas fa-city me-2"></i>
                     <span class="nav-link-text ms-1">{{ __('city::city.Cities') }}</span>

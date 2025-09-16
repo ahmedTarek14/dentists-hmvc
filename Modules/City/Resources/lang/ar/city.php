@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Cities' => 'المدن',
+    'Cities' => 'المدن و المناطق',
     'All Cities' => 'جميع المدن',
     'Add New City' => 'إضافة مدينة جديدة',
     'City Name' => 'اسم المدينة',
@@ -18,5 +18,5 @@ return [
     'Edit City' => 'تعديل المدينه',
     'Edit' => 'تعديل',
     'Are you sure you want to change the status?' => 'هل أنت متأكد أنك تريد تغيير الحالة؟',
-    'Shipping Fees' => 'رسوم الشحن',
+    'Manage Districts' => 'إدارة المناطق',
 ];

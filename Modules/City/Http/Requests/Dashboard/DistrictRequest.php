@@ -2,11 +2,12 @@
 
 namespace Modules\City\Http\Requests\Dashboard;
 
-use Illuminate\Contracts\Validation\Validator;
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CityRequest extends FormRequest
+class DistrictRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,6 +18,7 @@ class CityRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Handle a failed validation attempt.
      *
@@ -27,28 +29,34 @@ class CityRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json($validator->errors()->first(), 400));
+        throw new HttpResponseException(
+            response()->json($validator->errors()->first(), 400)
+        );
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
-
-        $rules['name'] = ['required', 'string', 'max:255'];
-
-        return $rules;
+        return [
+            'name'          => ['required', 'string', 'max:255'],
+            'shipping_fees' => ['required', 'numeric', 'min:0'],
+        ];
     }
 
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
     public function attributes()
     {
-        $attributes = [
-            'name' => __('city::city.City Name'),
+        return [
+            'name'          => __('city::district.District Name'),
+            'shipping_fees' => __('city::district.Shipping Fees'),
         ];
-
-        return $attributes;
     }
 }

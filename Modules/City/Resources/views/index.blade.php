@@ -19,11 +19,6 @@
                         <label class="form-label">{{ __('city::city.City Name') }}</label>
                         <input type="text" class="form-control" name="name">
                     </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">{{ __('city::city.Shipping Fees') }}</label>
-                        <input type="number" step="0.01" min="0" class="form-control" name="shipping_fees">
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary"
@@ -50,7 +45,6 @@
                             <thead>
                                 <tr>
                                     <th>{{ __('city::city.City Name') }}</th>
-                                    <th>{{ __('city::city.Shipping Fees') }}</th>
                                     <th class="text-center">{{ __('city::city.Status') }}</th>
                                     <th class="text-center">{{ __('city::city.Actions') }}</th>
                                 </tr>
@@ -59,7 +53,6 @@
                                 @forelse($cities as $city)
                                     <tr>
                                         <td>{{ $city->name }}</td>
-                                        <td>{{ number_format($city->shipping_fees, 2) }}</td>
                                         <td class="text-center">
                                             <span class="badge bg-{{ $city->status ? 'success' : 'danger' }}">
                                                 {{ $city->status ? __('city::city.Active') : __('city::city.Inactive') }}
@@ -74,6 +67,11 @@
                                             <a href="javascript:;" class="btn btn-sm btn-info btn-modal-view"
                                                 data-url="{{ route('admin.city.edit', ['city' => $city->id]) }}">
                                                 {{ __('city::city.Edit') }}
+                                            </a>
+
+                                            <a href="{{ route('admin.district.index', ['city' => $city->id]) }}"
+                                                class="btn btn-sm btn-secondary">
+                                                {{ __('city::city.Manage Districts') }}
                                             </a>
                                         </td>
                                     </tr>

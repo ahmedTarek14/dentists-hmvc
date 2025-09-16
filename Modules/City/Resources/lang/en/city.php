@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Cities' => 'Cities',
+    'Cities' => 'Cities and districts',
     'All Cities' => 'All Cities',
     'Add New City' => 'Add New City',
     'City Name' => 'City Name',
@@ -18,5 +18,5 @@ return [
     'Edit City' => 'Edit City',
     'Edit' => 'Edit',
     'Are you sure you want to change the status?' => 'Are you sure you want to change the status?',
-    'Shipping Fees' => 'Shipping Fees',
+    'Manage Districts' => 'Manage Districts',
 ];
