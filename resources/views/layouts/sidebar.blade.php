@@ -253,7 +253,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="m-0 d-inline-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
             <img src="{{ aurl('img/curved-images/curved6.png') }}" class="h-100" alt="logo"
-                style="max-height: 40px;">
+                style="max-height: 60px;">
         </a>
     </div>
     <hr class="horizontal dark mt-0 mb-2">

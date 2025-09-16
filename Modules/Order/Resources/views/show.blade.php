@@ -103,8 +103,9 @@
                         {{-- From --}}
                         <div class="p-3 border rounded bg-light flex-fill me-2 text-center hover-card">
                             <h6 class="text-muted">{{ __('order::order.From') }}</h6>
-                            <p class="fw-bold mb-1">{{ $order->city_from?->name ?? '-' }}</p>
-                            <small class="text-muted">{{ $order->district_from?->name ?? '-' }}</small>
+                            <p class="fw-bold mb-1">{{ $order->city_from?->name ?? __('order::order.OfficialStore') }}</p>
+                            <small
+                                class="text-muted">{{ $order->district_from?->name ?? __('order::order.OfficialStore') }}</small>
                         </div>
 
                         {{-- Arrow --}}
