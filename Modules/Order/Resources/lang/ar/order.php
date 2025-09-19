@@ -34,4 +34,14 @@ return [
     'Pending'        => 'قيد الانتظار',
     'Delivered'      => 'تم التوصيل',
     'Canceled'       => 'ملغي',
+
+
+    'DoctorRating' => 'تقييم الدكتور',
+    'TechnicianRating' => 'تقييم الفني',
+    'Rating' => 'التقييم',
+    'Comment' => 'التعليق',
+    'ForTechnician' => 'لصالح الفني',
+    'ForDoctor' => 'لصالح الدكتور',
+    'NoDoctorRating' => 'لا يوجد تقييم من الدكتور حتى الآن.',
+    'NoTechnicianRating' => 'لا يوجد تقييم من الفني حتى الآن.',
 ];

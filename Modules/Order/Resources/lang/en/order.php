@@ -34,4 +34,14 @@ return [
     'Pending'        => 'Pending',
     'Delivered'      => 'Delivered',
     'Canceled'       => 'Canceled',
+
+
+    'DoctorRating' => 'Doctor Rating',
+    'TechnicianRating' => 'Technician Rating',
+    'Rating' => 'Rating',
+    'Comment' => 'Comment',
+    'ForTechnician' => 'For Technician',
+    'ForDoctor' => 'For Doctor',
+    'NoDoctorRating' => 'No rating from the doctor yet.',
+    'NoTechnicianRating' => 'No rating from the technician yet.',
 ];

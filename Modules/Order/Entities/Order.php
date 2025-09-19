@@ -9,6 +9,7 @@ use Modules\City\Entities\City;
 use Modules\City\Entities\District;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\Work;
+use Modules\User\Entities\Rating;
 
 class Order extends Model
 {
@@ -66,5 +67,16 @@ class Order extends Model
     public function district_to()
     {
         return $this->belongsTo(District::class, 'district_to_id');
+    }
+
+    public function doctorRatings()
+    {
+        return $this->hasMany(Rating::class, 'work_id', 'work_id')
+            ->orWhere('product_id', $this->product_id);
+    }
+
+    public function technicianRatings()
+    {
+        return $this->hasMany(Rating::class, 'rated_user_id', 'user_id');
     }
 }

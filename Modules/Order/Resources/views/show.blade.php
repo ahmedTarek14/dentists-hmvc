@@ -138,6 +138,46 @@
                 <p><strong>{{ __('order::order.ShippingFees') }}:</strong> {{ $order->shipping_fees }}</p>
                 <p><strong>{{ __('order::order.TotalPrice') }}:</strong> {{ $order->total_price }}</p>
             </div>
+
+
+
+            {{-- Doctor’s Rating (for service/product → indirectly for technician) --}}
+            <div class="border rounded p-3 mb-3 hover-card">
+                <h6 class="text-primary">{{ __('order::order.DoctorRating') }}</h6>
+
+                @if ($order->doctorRatings->isNotEmpty())
+                    @foreach ($order->doctorRatings as $rating)
+                        <div class="mb-3">
+                            <p><strong>{{ __('order::order.Rating') }}:</strong> {{ $rating->rating }}/5</p>
+                            <p><strong>{{ __('order::order.Comment') }}:</strong> {{ $rating->comment ?? '-' }}</p>
+                            <p class="text-muted">
+                                {{ __('order::order.ForTechnician') }}: {{ $order->provider?->name ?? '-' }}
+                            </p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-muted">{{ __('order::order.NoDoctorRating') }}</p>
+                @endif
+            </div>
+
+            {{-- Technician’s Rating (for doctor) --}}
+            <div class="border rounded p-3 mb-3 hover-card">
+                <h6 class="text-primary">{{ __('order::order.TechnicianRating') }}</h6>
+
+                @if ($order->technicianRatings->isNotEmpty())
+                    @foreach ($order->technicianRatings as $rating)
+                        <div class="mb-3">
+                            <p><strong>{{ __('order::order.Rating') }}:</strong> {{ $rating->rating }}/5</p>
+                            <p><strong>{{ __('order::order.Comment') }}:</strong> {{ $rating->comment ?? '-' }}</p>
+                            <p class="text-muted">
+                                {{ __('order::order.ForDoctor') }}: {{ $order->requester?->name ?? '-' }}
+                            </p>
+                        </div>
+                    @endforeach
+                @else
+                    <p class="text-muted">{{ __('order::order.NoTechnicianRating') }}</p>
+                @endif
+            </div>
         </div>
     </div>
 @endsection
