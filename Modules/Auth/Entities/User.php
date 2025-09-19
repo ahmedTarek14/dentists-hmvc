@@ -74,12 +74,22 @@ class User extends Authenticatable
         return $this->hasMany(Order::class, 'provider_id');
     }
 
-    /**
-     * التقييمات المرتبطة بالمستخدم
-     */
-    public function ratings()
+    // التقييمات اللي المستخدم كتبها (هو المقيِّم)
+    public function givenRatings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class, 'user_id');
+    }
+
+    // التقييمات اللي اتعملت له (هو المتقيَّم)
+    public function receivedRatings()
+    {
+        return $this->hasMany(Rating::class, 'rated_user_id');
+    }
+
+    // حساب متوسط التقييمات اللي اتعملت له
+    public function averageReceivedRating()
+    {
+        return $this->receivedRatings()->avg('rating');
     }
 
     /**
