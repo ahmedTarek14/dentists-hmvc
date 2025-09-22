@@ -47,6 +47,10 @@ class OrderResource extends JsonResource
             'city_from' => $this->city_from ? $this->city_from->name : null,
             'city_to'   => $this->city_to ? $this->city_to->name : null,
 
+            'is_rated_by_doctor'     => $this->doctorRating()->exists() ? 1 : 0,
+            'is_rated_by_technician' => $this->technicianRating()->exists() ? 1 : 0,
+
+
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
         ];

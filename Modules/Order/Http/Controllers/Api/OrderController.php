@@ -51,6 +51,8 @@ class OrderController extends Controller
                 'district_to_id'    => $request->district_to_id,
                 'product_id'        => $request->product_id,
                 'work_id'           => $request->work_id,
+                'address'           => $request->address,
+                'more_info'           => $request->more_info,
             ]);
 
             return api_response_success(new OrderPreviewResource($order));
@@ -76,6 +78,8 @@ class OrderController extends Controller
                 'shipping_fees'  => $request->shipping_fees,
                 'total_price'    => $request->total_price,
                 'status'         => 'pending',
+                'address'           => $request->address,
+                'more_info'           => $request->more_info,
             ]);
 
             return response()->json([

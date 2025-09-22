@@ -15,6 +15,7 @@ use Modules\Course\Entities\CourseUser;
 use Modules\Order\Entities\Order;
 use Modules\Product\Entities\Work;
 use Modules\User\Entities\Rating;
+use Modules\User\Entities\Type;
 
 class User extends Authenticatable
 {
@@ -35,7 +36,9 @@ class User extends Authenticatable
         'city_id',
         'district_id',
         'address',
-        'image'
+        'image',
+        'phone',
+        'type_id'
 
     ];
 
@@ -123,5 +126,10 @@ class User extends Authenticatable
     public function getImagePathAttribute()
     {
         return $this->get_image($this->image, 'users');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
     }
 }

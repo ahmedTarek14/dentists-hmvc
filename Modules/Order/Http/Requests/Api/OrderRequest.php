@@ -37,6 +37,8 @@ class OrderRequest extends FormRequest
             'provider_id'    => ['required_with:work_id', 'nullable', 'exists:users,id'],
             'city_to_id'     => ['required', 'exists:cities,id'],
             'district_to_id' => ['required', 'exists:districts,id'],
+            'address' => ['required', 'string'],
+            'more_info' => ['nullable', 'string']
         ];
     }
 
@@ -51,6 +53,8 @@ class OrderRequest extends FormRequest
             'provider_id' => __('order::common.provider'),
             'city_to_id'  => __('order::common.city_to'),
             'district_to_id'  => __('order::common.district_to'),
+            'address' => __('auth::common.address'),
+            'more_info'  => __('order::common.more_info'),
         ];
     }
 }

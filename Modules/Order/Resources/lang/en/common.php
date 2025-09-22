@@ -12,4 +12,5 @@ return [
     'district_from'        => 'District From',
     'product'        => 'Product',
     'work'           => 'Work',
+    'more_info' => 'More Info'
 ];

@@ -23,6 +23,8 @@ class WorkResource extends JsonResource
             'technician'      => [
                 'id'   => (int) $this->technician?->id,
                 'name' => (string) $this->technician?->name,
+                'phone' => (string) $this->technician?->phone,
+                'type_name' => (string) $this->technician?->type?->name,
             ],
             'rating' => round((float) ($this->ratings_avg_rating ?? 0), 1), // من withAvg
         ];

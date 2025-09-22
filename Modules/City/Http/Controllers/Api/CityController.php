@@ -17,7 +17,10 @@ class CityController extends Controller
     public function cities()
     {
         try {
-            $cities = City::where('status', '1')->orderBy('id', 'desc')->get();
+            $cities = City::where('status', '1')
+                ->whereHas('districts') // بس المدن اللي عندها ديستريكت
+                ->orderBy('id', 'desc')
+                ->get();
             $data = CityResource::collection($cities)->response()->getData(true);
             return api_response_success($data);
         } catch (\Throwable $th) {

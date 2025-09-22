@@ -15,7 +15,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_number', 'product_id', 'work_id', 'product_price', 'shipping_fees', 'total_price', 'status', 'requester_id', 'provider_id', 'city_from_id', 'city_to_id', 'district_from_id', 'district_to_id'];
+    protected $fillable = ['service_number', 'product_id', 'work_id', 'product_price', 'shipping_fees', 'total_price', 'status', 'requester_id', 'provider_id', 'city_from_id', 'city_to_id', 'district_from_id', 'district_to_id', 'address', 'more_info'];
 
     /**
      * المنتج المرتبط بالطلب
@@ -69,14 +69,22 @@ class Order extends Model
         return $this->belongsTo(District::class, 'district_to_id');
     }
 
-    public function doctorRatings()
+    // الدكتور بيريت العمل أو المنتج المرتبط بالأوردر
+    public function doctorRating()
     {
-        return $this->hasMany(Rating::class, 'work_id', 'work_id')
-            ->orWhere('product_id', $this->product_id);
+        return $this->hasOne(Rating::class, 'user_id', 'requester_id')
+            ->when($this->work_id, function ($q) {
+                $q->where('work_id', $this->work_id);
+            })
+            ->when($this->product_id, function ($q) {
+                $q->where('product_id', $this->product_id);
+            });
     }
 
-    public function technicianRatings()
+    // الفني بيريت الدكتور صاحب الطلب
+    public function technicianRating()
     {
-        return $this->hasMany(Rating::class, 'rated_user_id', 'user_id');
+        return $this->hasOne(Rating::class, 'user_id', 'provider_id')
+            ->where('rated_user_id', $this->requester_id);
     }
 }

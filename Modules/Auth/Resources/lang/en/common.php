@@ -30,6 +30,9 @@ return [
     'logout' => 'Logout',
     'city_id' => 'City',
     'district_id' => 'District',
-    'profile_image' => 'Profile Image'
+    'profile_image' => 'Profile Image',
+    'phone' => 'Phone',
+    'type_id' => 'Type of lab',
+    'address' => 'Address'
 
 ];

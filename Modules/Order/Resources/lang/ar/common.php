@@ -12,4 +12,5 @@ return [
     'district_from'        => 'الحي المرسل',
     'product'        => 'المنتج',
     'work'           => 'العمل',
+    'more_info' => 'معلومات اضافيه'
 ];

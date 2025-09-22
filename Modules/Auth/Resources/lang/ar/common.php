@@ -29,5 +29,8 @@ return [
     'logout' => 'تسجيل الخروج',
     'city_id' => 'المدينه',
     'district_id' => 'الحي',
-    'profile_image' => 'الصوره الشخصيه'
+    'profile_image' => 'الصوره الشخصيه',
+    'phone' => 'رقم الهاتف',
+    'type_id' => 'نوع المعمل',
+    'address' => 'العنوان'
 ];

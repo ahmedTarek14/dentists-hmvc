@@ -18,6 +18,7 @@ class DoctorResource extends JsonResource
             'id'        => (int) $this->id,
             'type'      => (string) $this->type,
             'name'      => (string) $this->name,
+            'phone'      => (string) $this?->phone,
             'email'     => (string) $this->email,
             'address' => (string)$this->address ? $this->address : null,
             'image' => $this->image ? $this->image_path : null,

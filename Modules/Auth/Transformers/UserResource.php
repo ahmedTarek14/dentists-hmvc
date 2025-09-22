@@ -19,8 +19,11 @@ class UserResource extends JsonResource
             'type' => (string)$this->type,
             'name' => (string)$this->name,
             'email' => (string)$this->email,
+            'phone' => $this->phone ? (string) $this->phone : null,
             'address' => (string)$this->address ? $this->address : null,
             'image' => $this->image ? $this->image_path : null,
+            'type_id' => $this->type_id ? (int) $this->type_id : null,
+            'type_name' => $this->type_id ? (string) $this->type->name : null,
         ];
     }
 }

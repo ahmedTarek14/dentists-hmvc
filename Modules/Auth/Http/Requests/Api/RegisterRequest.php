@@ -54,6 +54,8 @@ class RegisterRequest extends FormRequest
                     ->uncompromised(),
                 'confirmed',
             ],
+            'phone' => ['required', 'string', 'regex:/^(01)[0-9]{9}$/'],
+            'type_id' => ['required_if:type,technician', 'exists:types,id'],
             'city_id' => ['required', 'exists:cities,id'],
             'district_id' => ['required', 'exists:districts,id'],
             'address' => ['nullable', 'string', 'max:255'],
@@ -69,6 +71,9 @@ class RegisterRequest extends FormRequest
             'password' => __('auth::common.password'),
             'city_id' => __('auth::common.city_id'),
             'district_id' => __('auth::common.district_id'),
+            'phone' => __('auth::common.phone'),
+            'type_id' => __('auth::common.type_id'),
+            'address' => __('auth::common.address'),
         ];
     }
 }
