@@ -121,7 +121,15 @@
                         <div class="p-3 border rounded bg-light flex-fill ms-2 text-center hover-card">
                             <h6 class="text-muted">{{ __('order::order.To') }}</h6>
                             <p class="fw-bold mb-1">{{ $order->city_to?->name ?? '-' }}</p>
-                            <small class="text-muted">{{ $order->district_to?->name ?? '-' }}</small>
+                            <small class="text-muted d-block mb-2">{{ $order->district_to?->name ?? '-' }}</small>
+
+                            {{-- Address --}}
+                            @if (!empty($order->address))
+                                <small class="text-secondary">
+                                    <i class="bi bi-geo-alt-fill me-1 text-primary"></i>
+                                    {{ $order->address }}
+                                </small>
+                            @endif
                         </div>
 
                     </div>
@@ -139,9 +147,18 @@
                 <p><strong>{{ __('order::order.TotalPrice') }}:</strong> {{ $order->total_price }}</p>
             </div>
 
+            {{-- Additional Info --}}
+            @if (!empty($order->more_info))
+                <div class="border rounded p-3 mb-3 hover-card">
+                    <h6 class="text-primary mb-2">
+                        <i class="bi bi-info-circle-fill me-1"></i>
+                        {{ __('order::common.more_info') }}
+                    </h6>
+                    <p class="mb-0">{{ $order->more_info }}</p>
+                </div>
+            @endif
 
-
-            {{-- Doctor’s Rating (for service/product → indirectly for technician) --}}
+            {{-- Doctor’s Rating --}}
             <div class="border rounded p-3 mb-3 hover-card">
                 <h6 class="text-primary">{{ __('order::order.DoctorRating') }}</h6>
 
@@ -159,7 +176,7 @@
                 @endif
             </div>
 
-            {{-- Technician’s Rating (for doctor) --}}
+            {{-- Technician’s Rating --}}
             <div class="border rounded p-3 mb-3 hover-card">
                 <h6 class="text-primary">{{ __('order::order.TechnicianRating') }}</h6>
 

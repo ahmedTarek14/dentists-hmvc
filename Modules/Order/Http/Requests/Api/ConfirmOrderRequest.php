@@ -44,6 +44,8 @@ class ConfirmOrderRequest extends FormRequest
             'district_to_id'      => ['required', 'exists:districts,id'],
             'product_id'      => ['nullable', 'exists:products,id'],
             'work_id'         => ['nullable', 'exists:works,id'],
+            'address' => ['required', 'string'],
+            'more_info' => ['nullable', 'string']
         ];
     }
 
@@ -65,6 +67,10 @@ class ConfirmOrderRequest extends FormRequest
             'work_id'        => __('order::common.work'),
             'district_to_id'  => __('order::common.district_to'),
             'district_from_id'  => __('order::common.district_from'),
+            'address' => __('auth::common.address'),
+            'more_info'  => __('order::common.more_info'),
+
+
         ];
     }
 }

@@ -31,6 +31,9 @@ class OrderPreviewResource extends JsonResource
 
             'product_id'        => $this->product_id ? (int) $this->product_id : null, // المنتج
             'work_id'           => $this->work_id ? (int) $this->work_id : null,       // الخدمة
+
+            'address'           => (string) $this->address ?? '',                 // عنوان العميل
+            'more_info'         => (string) $this?->more_info,
         ];
     }
 }
