@@ -128,8 +128,8 @@ class User extends Authenticatable
         return $this->get_image($this->image, 'users');
     }
 
-    public function type()
+    public function typeRelation()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'type_id');
     }
 }

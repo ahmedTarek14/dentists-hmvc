@@ -73,7 +73,7 @@ class WorkController extends Controller
             $technicianId = $request->id ?? sanctum()->id();
 
 
-            $works = Work::withAvg('ratings', 'rating')
+            $works = Work::with(['ratings', 'technician.typeRelation'])->withAvg('ratings', 'rating')
                 ->where('technician_id', $technicianId)
                 ->orderByDesc('id')
                 ->paginate(10);
