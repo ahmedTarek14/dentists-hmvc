@@ -20,7 +20,7 @@ class WorkController extends Controller
     public function index()
     {
         try {
-            $works = Work::with(['technician:id,name'])
+            $works = Work::with(['technician:id,name,phone,type_id', 'technician.typeRelation'])
                 ->withAvg('ratings', 'rating')
                 ->orderByDesc('ratings_avg_rating')
                 ->orderByDesc('id')
