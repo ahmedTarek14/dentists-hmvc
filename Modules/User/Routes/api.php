@@ -18,6 +18,7 @@ Route::middleware(['auth:sanctum'])
     ->prefix('rate')
     ->group(function () {
         Route::post('/store', [RateController::class, 'store'])->name('store');
+        Route::get('/user-ratings', [RateController::class, 'userRatings'])->name('userRatings');
     });
 
 

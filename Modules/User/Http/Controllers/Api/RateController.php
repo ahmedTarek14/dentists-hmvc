@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Auth\Entities\User;
 use Modules\User\Entities\Rating;
 use Modules\User\Http\Requests\Api\RateRequest;
+use Modules\User\Transformers\RatingsResource;
 
 class RateController extends Controller
 {
@@ -47,5 +48,28 @@ class RateController extends Controller
         ]);
 
         return api_response_success($rating);
+    }
+
+
+    public function userRatings(Request $request)
+    {
+        try {
+            if (!$request->id && !sanctum()) {
+                return api_response_error(__('product::work.must_be_logged_in_or_provide_id'));
+            }
+
+            // لو في id في الريكوست هنشتغل عليه
+            $targetUserId = $request->id ?? sanctum()->id();
+
+
+            $ratings = Rating::getUserRatings($targetUserId);
+
+
+            $data = RatingsResource::collection($ratings)->response()->getData(true);
+
+            return api_response_success($data);
+        } catch (\Throwable $th) {
+            return api_response_error();
+        }
     }
 }

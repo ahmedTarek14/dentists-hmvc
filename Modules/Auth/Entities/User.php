@@ -114,6 +114,16 @@ class User extends Authenticatable
     {
         return $this->works()->with('ratings')->get()->flatMap->ratings->avg('rating');
     }
+    //دي ادائها احسن نفس الي قبلها
+    //     public function getAverageRatingAttribute()
+    // {
+    //     return round(
+    //         $this->works()
+    //             ->join('ratings', 'ratings.work_id', '=', 'works.id')
+    //             ->avg('ratings.rating') ?? 0,
+    //         1
+    //     );
+    // }
 
     public function city()
     {

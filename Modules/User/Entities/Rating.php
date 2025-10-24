@@ -34,4 +34,20 @@ class Rating extends Model
     {
         return $this->belongsTo(Work::class);
     }
+
+
+    public static function getUserRatings($userId = null)
+    {
+        $targetUserId = $userId ?? auth()->id();
+        if (!$targetUserId) return collect();
+
+        return self::with([
+            'user:id,name',   // اللي كتب التقييم
+            'work:id,title',        // العمل لو موجود
+            'product:id,name',     // المنتج لو موجود
+        ])
+            ->where('rated_user_id', $targetUserId)
+            ->latest()
+            ->paginate(10);
+    }
 }
