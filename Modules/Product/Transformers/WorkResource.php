@@ -25,7 +25,7 @@ class WorkResource extends JsonResource
                 'name' =>  $this->technician?->name,
                 'phone' => (string) $this->technician?->phone,
                 'type_name' => (string) $this->technician?->typeRelation?->name,
-                'rating' => round((float) ($this->technician?->averageRating ?? 0), 1),
+                'rating' => round((float) ($this->technician?->averageRating() ?? 0), 1),
             ],
         ];
     }
