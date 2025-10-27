@@ -17,11 +17,16 @@ class WorkController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             $works = Work::with(['technician:id,name,phone,type_id', 'technician.typeRelation'])
                 ->withAvg('ratings', 'rating')
+                ->when($request->has('type'), function ($query) use ($request) {
+                    $query->whereHas('technician', function ($q) use ($request) {
+                        $q->where('type_id', $request->type);
+                    });
+                })
                 ->orderByDesc('ratings_avg_rating')
                 ->orderByDesc('id')
                 ->paginate(10);
