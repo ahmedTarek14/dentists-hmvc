@@ -38,5 +38,12 @@ return [
     'No users found' => 'No users found',
     'Leave empty if not changing' => 'Leave empty if not changing',
 
+    'Types' => 'Types',
+    'All Types' => 'All Types',
+    'Add New Type' => 'Add New Type',
+    'Edit Type' => 'Edit Type',
+    'No Types Found' => 'No Types Found',
+    'Types Table' => 'Types Table',
+
 
 ];

@@ -38,4 +38,13 @@ return [
     // الرسائل
     'No users found' => 'لا يوجد مستخدمين',
     'Leave empty if not changing' => 'اترك الحقل فارغًا إذا لم ترغب في تغييره',
+
+
+    'Types' => 'التخصصات',
+    'All Types' => 'جميع التخصصات',
+    'Add New Type' => 'إضافة تخصص جديد',
+    'Edit Type' => 'تعديل التخصص',
+    'No Types Found' => 'لا يوجد تخصصات',
+    'Types Table' => 'جدول التخصصات',
+
 ];

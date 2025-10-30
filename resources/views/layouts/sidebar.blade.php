@@ -283,6 +283,15 @@
                 </a>
             </li>
 
+            <!-- التخصصات -->
+            <li class="nav-item mb-1">
+                <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.types.*') ? 'active bg-gradient-primary text-white' : '' }}"
+                    href="{{ route('admin.types.index') }}">
+                    <i class="fas fa-tools me-2"></i>
+                    <span class="nav-link-text">{{ __('user::user.Types') }}</span>
+                </a>
+            </li>
+
             <!-- الطلبات -->
             <li class="nav-item mb-1">
                 <a class="nav-link d-flex align-items-center {{ request()->routeIs('admin.orders.*') ? 'active bg-gradient-primary text-white' : '' }}"
