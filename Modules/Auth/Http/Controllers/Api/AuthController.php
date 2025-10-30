@@ -14,6 +14,8 @@ use Modules\Auth\Http\Requests\Api\AvatarRequest;
 use Modules\Auth\Http\Requests\Api\LoginRequest;
 use Modules\Auth\Http\Requests\Api\RegisterRequest;
 use Modules\Auth\Transformers\UserResource;
+use Modules\Auth\Emails\PasswordResetMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -69,6 +71,38 @@ class AuthController extends Controller
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
         return api_response_success(__('auth::common.logout_successfully'));
+    }
+
+    public function forget_password(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email', 'max:255', 'exists:users,email'],
+        ], [], [
+            'email' => __('auth::common.email'),
+        ]);
+
+        if ($validation->fails()) {
+            return api_response_error($validation->errors()->first());
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        $code = rand(100000, 999999);
+
+        if (!$userpassreset = PasswordReset::where('email', $user->email)->first()) {
+            $userpassreset = PasswordReset::create([
+                'email' => $user->email,
+                'token' => $code,
+            ]);
+        } else {
+            $userpassreset->where('email', $user->email)->update([
+                'token' => $code,
+            ]);
+        }
+
+        Mail::to($user->email)->send(new PasswordResetMail($code));
+
+        return api_response_success(__('auth::common.verification_code_sent'));
     }
 
     public function change_password(Request $request)

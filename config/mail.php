@@ -121,4 +121,7 @@ return [
         ],
     ],
 
+    'support_email' =>
+    'support@denstech.store',
+
 ];
