@@ -27,4 +27,5 @@ Route::name('auth.')
         Route::put('profile/update-image', 'updateAvatar')->name('updateAvatar')->middleware('auth:sanctum');
         Route::post('auth/forget-password', 'forget_password')->name('forget_password');
         Route::post('auth/change-password', 'change_password')->name('change_password');
+        Route::post('auth/edit-profile', 'edit_profile')->name('edit_profile')->middleware('auth:sanctum');
     });

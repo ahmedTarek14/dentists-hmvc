@@ -65,6 +65,50 @@ class AuthController extends Controller
         }
     }
 
+    public function edit_profile(Request $request)
+    {
+        $user = User::where('id', sanctum()->id())->first();
+
+        if (!$user) {
+            return api_response_error(__('auth::common.no_matching_data'));
+        }
+
+        $validation = Validator::make($request->all(), [
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'email' => ['sometimes', 'required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'phone' => ['sometimes', 'required', 'string', 'regex:/^(01)[0-9]{9}$/', 'unique:users,phone,' . $user->id],
+            'city_id' => ['sometimes', 'required', 'exists:cities,id'],
+            'district_id' => ['sometimes', 'required', 'exists:districts,id'],
+        ], [], [
+            'name' => __('auth::common.name'),
+            'email' => __('auth::common.email'),
+            'phone' => __('auth::common.phone'),
+            'city_id' => __('auth::common.city'),
+            'district_id' => __('auth::common.district'),
+        ]);
+
+        if ($validation->fails()) {
+            return api_response_error($validation->errors()->first());
+        }
+
+        try {
+            $user->update($request->only([
+                'name',
+                'email',
+                'phone',
+                'type_id',
+                'city_id',
+                'district_id',
+            ]));
+
+            return api_response_success([
+                'user' => new UserResource($user->fresh()),
+            ]);
+        } catch (\Throwable $th) {
+            return api_response_error();
+        }
+    }
+
     public function logout(Request $request)
     {
         $user = $request->user();
