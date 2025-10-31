@@ -86,7 +86,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center text-muted">{{ __('No products available') }}
+                                        <td colspan="6" class="text-center text-muted">
+                                            {{ __('product::product.No products available') }}
                                         </td>
                                     </tr>
                                 @endforelse

@@ -19,4 +19,11 @@ return [
     'No products available' => 'No products available',
     'No Description' => 'No description available',
 
+
+    'Works' => 'Works',
+    'All Works' => 'All Works',
+    'Works Table' => 'Works Table',
+    'Work Name' => 'Work Name',
+    'No works available' => 'No works available',
+
 ];

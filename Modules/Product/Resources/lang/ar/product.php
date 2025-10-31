@@ -17,4 +17,12 @@ return [
     'Delete' => 'حذف',
     'No products available' => 'لا توجد منتجات متاحة',
     'No Description' => 'لا يوجد وصف',
+
+
+
+    'Works' => 'الأعمال',
+    'All Works' => 'كل الأعمال',
+    'Works Table' => 'جدول الأعمال',
+    'Work Name' => 'اسم العمل',
+    'No works available' => 'لا توجد أعمال متاحة',
 ];
